@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>NoHach_Liu的主页</title>
+<style>
+body
+{
+	background-color:#AAFFEE;
+}
+h1
+{
+	background-color:#00FFFF;
+	color:#666666;
+	text-align:center;
+	font-family:"Microsoft JhengHei"
+}
+p
+{
+	font-family:"Microsoft YaHei";
+	font-size:20px;
+	text-align:left;
+}
+p.inset {border-style:inset;}
+p.outset {border-style:outset;}
+h1.inset {border-style:inset;}
+</style>
+</head>
+
+<body>
+
+<h1 class="inset"><DIV>
+<MARQUEE scrollAmount=2 direction=down height=60><CENTER><FONT face=Microsoft JhengHei color=#FF8800 size=7><B>王者荣耀开启vulkan方法</B></FONT></CENTER></MARQUEE>
+<MARQUEE scrollAmount=2 direction=up height=60><CENTER><FONT face=Microsoft YaHei color=olive size=7><B>NoHach_Liu转载&修改</B></FONT></CENTER></MARQUEE>
+</DIV></h1>
+
+<p class="outset"><span style='color:#888800'>给不太了解这个版本号的玩家说一下，在王者荣耀登录界面左上角的版本号里，不同的后缀代表着不同的优化：<br/>
+
+O2F 没有任何优化，爱卡不卡，自生自灭<br/>
+
+O2T 多线程优化 oppo，vivo，小米都是这个优化，第二挡<br/>
+
+V T 最流畅画面最好，多了vulkan 和多线程优化，属于第一档</span></p>
+
+<p>1.把/data/data/com.tencent.tmgp.sgame/shared_prefs/ com.tencent.tmgp.sgame.v2.playerprefs.xml  复制到 /data/com.tencent.tmgp.sgame.v2.playerprefs.xml</p>
+
+<p>2. 对/data/com.tencent.tmgp.sgame.v2.playerprefs.xml进行修改(参考后面转载的酷安文章)</p>
+
+<p>3.xposed edge王者荣耀运行或停止里面输入</p>
+
+<p><span style='color:#00AA00;'>====代码分割线====<br/>
+
+su<br/>
+
+<p><span style='color:#00AA00;'>cp -f /data/com.tencent.tmgp.sgame.v2.playerprefs.xml /data/data/com.tencent.tmgp.sgame/shared_prefs/<br/>
+
+<p><span style='color:#00AA00;'>====代码分割线====</span></p>
+
+<p>以下转自酷安，你需要认真阅读，并且把这篇文章对于/data/data/com.tencent.tmgp.sgame/shared_prefs/ com.tencent.tmgp.sgame.v2.playerprefs.xml的操作，作用到/data/com.tencent.tmgp.sgame.v2.playerprefs.xml上面</p>
+
+<p><span style='color:#00AA00;'>---转载分割线---</span></p>
+
+<p><span style='font-family:Microsoft YaHei'>王者荣耀O3,T & V,T优化方案修改教程</span></p>
+
+<p><span style='color:blue'>前言：第一次发帖，获得酷友的大力支持，特此修改并完善步骤</span></p>
+
+<p>本人机型：一加3 安卓7.1.2 & 8.0.0</p>
+
+<p>农药版本：1.34.1.11全量包（App版本）</p>
+
+<p>原机型优化：O2,F（真的是醉了）</p>
+
+<p><span style='color:red'>正文：（请务必看完本文所有内容再操作，尤其是注意事项）</span></p>
+
+<p>王者荣耀O3,T & V,T优化方案修改教程（Root修改方案）</p>
+
+<p><span style='color:blue'>前提准备：</span></p>
+
+<p>MT管理器2.0 & Root</p>
+
+<p><span style='color:blue'>操作步骤：</span></p>
+
+<p>第一步：
+
+路径：/data/data/com.tencent.tmgp.sgame<br />
+
+文件夹：shared_prefs<br />
+
+改权限：0551（原权限0771，多了两项写入权限）<br />
+
+第二步：<br />
+
+路径：/data/data/com.tencent.tmgp.sgame/shared_prefs/<br />
+
+文件：com.tencent.tmgp.sgame.v2.playerprefs.xml<br />
+
+修改内容：（示例为O3,T优化，附图片大体位置参考）<br />
+
+&#60;int name="EnableGLES3" value="2" /&#62; OpenGL选项<br />
+
+&#60;int name="EnableVulkan" value="3" /&#62; Vulkan选项<br />
+
+&#60;int name="EnableMTR" value="1" /&#62; 多线程选项<br />
+
+ 数值的意义：<br />
+
+0是关闭，1是可以则开启，2是强制，3是隐藏<br />
+
+ 依次类推，再举一例：<br />
+
+V,T优化：（未附图片，亲测有效）<br />
+
+&#60;int name="EnableGLES3" value="3" /&#62; OpenGL选项<br />
+
+&#60;int name="EnableVulkan" value="2" /&#62; Vulkan选项<br />
+
+&#60;int name="EnableMTR" value="1" /&#62; 多线程选项</p>
+
+<p><span style='color:blue'>注意：</span></p>
+
+<p>1.若出现没有的选项代码，则在任意位置（最好是int name打头的）添加缺失代码。以上3个代码之间的相对位置仅供参考，理论上不会影响实际效果，但注意代码添加的位置不要超过开头结尾的map语句之外，添加的代码注意下格式，单独另起一行即可，中间不要隔行（原因：强迫症，已附图）；
+
+<br/>2.所有步骤修改完毕后注意保存，修改过程中及修改后农药不要清除数据，否则文件会被清楚，手机重启前后不会失效，但app更新后不能保证失效与否；
+
+<br/>3.修改后，农药游戏内的部分设置内容会被锁定（具体哪些内容自己测试，反正都是些影响游戏体验的设置），建议玩家先登陆自己账号设置好具体的操作设置后，再退出游戏app，最后执行整套操作，以避免后续的重复登陆（取决于修改之前是否退出过账号）以及重复修改游戏设置（实际上完全无效）等问题；
+
+<br/>4.该方法只依赖Root，无需配合xposed及机型修改等操作，修改VT & O2,T的方法有很多，甚至不用Root都能办到，但O3,T因为目前没有指定机型，所以现阶段最好用此方法操作。</p>
+
+<p>最后，感谢酷安评论区，让这个游戏仿佛打开了新世界的大门。此方法非本人原创，只做了有效地简化整合，非常感谢以下几位酷安大神的原创教程：</p>
+
+<p>Rain2017、穆若清风（帧数Boom作者）、老王02441</p>
+
+<p><span style='color:#00AA00;'>---转载分割线---</span></p>
+
+</body>
+</html>
